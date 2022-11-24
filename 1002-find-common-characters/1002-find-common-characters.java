@@ -1,29 +1,30 @@
 class Solution {
-    public List<String> commonChars(String[] A) {
-        List<String> ans=new ArrayList<>();
+    public List<String> commonChars(String[] words) {
         
-        HashMap<Character,Integer> union=new HashMap<>();
+        HashMap<Character, Integer> map=new HashMap<>();
         
-        for(int i=0;i<A[0].length();i++){
-            union.put(A[0].charAt(i),union.getOrDefault(A[0].charAt(i),0)+1);
+        ArrayList<String> arr=new ArrayList<>();
+        
+        for(int i=0;i<words[0].length();i++){
+            map.put(words[0].charAt(i),map.getOrDefault(words[0].charAt(i),0)+1);
         }
         
-        for(int i = 1; i < A.length; i++){
-        HashMap<Character, Integer> temp = new HashMap<>(); 
-        for(int j = 0; j < A[i].length(); j++){
-            char curr = A[i].charAt(j); 
-            if(union.containsKey(curr)) temp.put(curr, Math.min(union.get(curr), temp.getOrDefault(curr, 0)+1)); 
+        for(int i=1;i<words.length;i++){
+            HashMap<Character, Integer> temp=new HashMap<>();
+            for(int j=0;j<words[i].length();j++){
+                char c=words[i].charAt(j);
+                if(map.containsKey(c)){
+                    temp.put(c,Math.min(map.get(c),temp.getOrDefault(c,0)+1));
+                }
+            }
+            map=temp;
         }
-        union = temp; 
-    }
         
-        for(char c: union.keySet()){
-            for(int i=0;i<union.get(c);i++){
-                ans.add(c+"");
+        for(char c1: map.keySet()){
+            for(int i=0;i<map.get(c1);i++){
+                arr.add(c1+"");
             }
         }
-        
-        return ans;
+        return arr;
     }
-    
 }
