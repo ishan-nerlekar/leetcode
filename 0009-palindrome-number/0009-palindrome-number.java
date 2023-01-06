@@ -1,17 +1,21 @@
 class Solution {
     public boolean isPalindrome(int x) {
-        StringBuilder temp=new StringBuilder();
+        
         String str=String.valueOf(x);
-        temp.append(str);
-        temp.reverse();
-        String res=temp.toString();
+        int start=0,end=str.length()-1;
+        int flag=0;
         
-        if(res.equals(str)){
-            return true;
+        while(start<end){
+            if(str.charAt(start)!=str.charAt(end)){
+                flag=1;
+                break;
+            }
+            start++;
+            end--;
         }
         
-        else{
-            return false;
-        }
+        if(flag==1) return false;
+        
+        return true;
     }
 }
