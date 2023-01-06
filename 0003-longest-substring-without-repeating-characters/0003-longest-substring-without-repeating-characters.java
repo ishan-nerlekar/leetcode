@@ -3,21 +3,25 @@ class Solution {
       
         HashMap<Character,Integer> map=new HashMap<>();
         
-        int start=0;
-        int maxl=0;
+        int end=0,start=0,len=0,counter=0;
         
-        if(s.length()<=1){
-            return s.length();
-        }
-        
-        for(int i=0;i<s.length();i++) {
-            char end=s.charAt(i);
-            if(map.containsKey(end)){
-                start = Math.max(start, map.get(end) + 1);
+        while(end<s.length()){
+            char c=s.charAt(end);
+            map.put(c,map.getOrDefault(c,0)+1);
+            if(map.get(c)>1) counter++;
+            
+            end++;
+            
+            while(counter>0){
+                char temp=s.charAt(start);
+                if(map.getOrDefault(temp,0)>1) counter--;
+                map.put(temp,map.getOrDefault(temp,0)-1);
+                start++;
             }
-            map.put(end,i);
-            maxl=Math.max(maxl,i-start+1);
+            
+            len=Math.max(len,end-start);
         }
-        return maxl;
+        
+        return len;
     }
 }
