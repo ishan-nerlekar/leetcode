@@ -11,6 +11,7 @@ class Solution {
             for(int i=0;i<sen[j].length();i++){
                 if(set.contains(sen[j].substring(0,i+1))){
                     sen[j]=sen[j].substring(0,i+1);
+                    break;
                 }
             }
         }
