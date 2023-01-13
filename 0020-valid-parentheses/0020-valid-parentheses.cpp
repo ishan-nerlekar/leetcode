@@ -19,9 +19,9 @@ public:
             }
             else{
                 if(stack.empty()) return false;
-                else if(isMatching(stack.top(),s[i])==false) return false;
+                else if(isMatching(stack.top(),s[i])) stack.pop();
                 else{
-                    stack.pop();
+                    return false;
                 }
             }
         }
