@@ -1,22 +1,17 @@
 class Solution {
 public:
-    int dfs(int headId,vector<int>& informTime,vector<int> adj[]){
-
-        int maxTime = 0;
-
-        for(auto it:adj[headId])
-           maxTime = max(maxTime,dfs(it,informTime,adj));
-
-        return informTime[headId] + maxTime;   
-    }
     int numOfMinutes(int n, int headID, vector<int>& manager, vector<int>& informTime) {
-        
-            vector<int> adj[100005];
-
-            for(int i=0;i<manager.size();i++)
-                if(manager[i] != -1)
-                  adj[manager[i]].push_back(i);
-            
-        return dfs(headID,informTime,adj);    
+        int res=0;
+        for(int i=0;i<manager.size();i++){
+            res=max(res,dfs(i,manager,informTime));
+        }
+        return res;
+    }
+    int dfs(int i,vector<int>& manager, vector<int>& informTime){
+        if(manager[i]!=-1){
+            informTime[i]+=dfs(manager[i],manager,informTime);
+            manager[i]=-1;
+        }
+        return informTime[i];
     }
 };
