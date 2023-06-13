@@ -1,16 +1,14 @@
 class Solution {
 public:
     int fib(int n) {
-        int sum=0;
-        sum=fibonacci(n,sum);
-        return sum;
+        vector<int> dp(n+1,-1);
+        if(n<=1) return n;
+        dp[0]=0;
+        dp[1]=1;
+        for(int i=2;i<n+1;i++){
+            dp[i]=dp[i-1]+dp[i-2];
+        }
+        return dp[n];
     }
     
-    int fibonacci(int n,int sum){
-        if(n<=1){
-            return n;
-        }
-        sum=fibonacci(n-1,sum)+fibonacci(n-2,sum);
-        return sum;
-    }
 };
