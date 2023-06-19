@@ -10,7 +10,7 @@ public:
         return f(0,sum/k,0,k,visited,nums);
     }
     bool f(int start,int target,int cursum,int k,vector<bool>& vis,vector<int>& nums){
-        if(k == 1) return true;
+        if(k == 0) return true;
 
           if(target == cursum)
                return f(0,target,0,k-1,vis,nums);
